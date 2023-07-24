@@ -13,13 +13,13 @@ const auth = require('../middlewares/auth');
 const movieRoutes = require('./movies');
 const userRoutes = require('./users');
 
-router.post('/signin', signinValidation, login); // авторизация
-router.post('/signup', signUpValidation, createUser); // регистрация
+router.post('/signin', signinValidation, login);
+router.post('/signup', signUpValidation, createUser);
 router.get('/signout', logOut);
 
-router.use(auth); // миддлвара проверяет наличие кук, располагается перед защищенными роутами
+router.use(auth);
 
-router.use('/movies', movieRoutes); // получает роуты, в которых содержатся запросы и ответы на них
+router.use('/movies', movieRoutes);
 router.use('/users', userRoutes);
 router.use('*', (_, res, next) => {
   throw next(new NotFound('Page not found'));

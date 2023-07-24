@@ -1,4 +1,4 @@
-class Forbidden extends Error { // 403 отказ в правах доступа
+class Forbidden extends Error {
   constructor(message) {
     super(message);
     this.name = 'HTTP 403 Forbidden';

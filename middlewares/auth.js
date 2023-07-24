@@ -1,9 +1,8 @@
-/* eslint-disable no-console */
 const jwt = require('jsonwebtoken');
 
 const JsonWebTokenError = require('../errors/JsonWebTokenError');
 
-const { NODE_ENV, JWT_SECRET } = process.env; //
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 const auth = (req, _, next) => {
   const token = req.cookies.jwt;
