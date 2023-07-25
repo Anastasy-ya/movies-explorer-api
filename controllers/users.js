@@ -100,7 +100,7 @@ const changeProfileData = (req, res, next) => {
     });
 };
 
-const logOut = async (_, res, next) => {
+const logOut = (_, res, next) => {
   try {
     res.clearCookie('jwt').send({ message: 'Logged out' });
   } catch (err) {

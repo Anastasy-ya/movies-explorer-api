@@ -4,8 +4,8 @@ const ValidationError = require('../errors/ValidationError');
 const NotFound = require('../errors/NotFound');
 const Forbidden = require('../errors/Forbidden');
 
-const getMovies = (_, res, next) => {
-  Movie.find({})
+const getMovies = (req, res, next) => {
+  Movie.find({ owner: req.user._id })
     .then((movie) => res.status(http2.HTTP_STATUS_OK).send(movie))
     .catch(next);
 };
