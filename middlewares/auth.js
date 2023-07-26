@@ -11,7 +11,7 @@ const auth = (req, _, next) => {
   try {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
-    next(new JsonWebTokenError('Unauthorized!'));
+    next(new JsonWebTokenError('Authorization required!'));
   }
   req.user = payload;
   next();

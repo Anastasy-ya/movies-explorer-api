@@ -39,6 +39,12 @@ app.use(cors({
   origin: [
     'http://localhost:3001',
     'http://localhost:3000',
+    'http://anastasy-ya.diplom.nomoredomains.xyz',
+    'http://api.anastasy-ya.diplom.nomoredomains.xyz',
+    'https://localhost:3001',
+    'https://localhost:3000',
+    'https://anastasy-ya.diplom.nomoredomains.xyz',
+    'https://api.anastasy-ya.diplom.nomoredomains.xyz',
   ],
   credentials: true,
 }));
