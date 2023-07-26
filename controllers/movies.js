@@ -1,5 +1,5 @@
 const http2 = require('http2').constants;
-const Movie = require('../models/Movie');
+const Movie = require('../models/movie');
 const ValidationError = require('../errors/ValidationError');
 const NotFound = require('../errors/NotFound');
 const Forbidden = require('../errors/Forbidden');
