@@ -26,11 +26,11 @@ const routes = require('./routes/index');
 
 const errorHandler = require('./middlewares/error');
 
-const { DB_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb', PORT = 3000 } = process.env;
+const { DB_URL_DIPLOM = 'mongodb://127.0.0.1:27017/bitfilmsdb', PORT = 3001 } = process.env;
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-mongoose.connect(DB_URL, {
+mongoose.connect(DB_URL_DIPLOM, {
   useNewUrlParser: true,
   family: 4,
 });
