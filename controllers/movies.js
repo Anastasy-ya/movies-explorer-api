@@ -3,6 +3,12 @@ const Movie = require('../models/movie');
 const ValidationError = require('../errors/ValidationError');
 const NotFound = require('../errors/NotFound');
 const Forbidden = require('../errors/Forbidden');
+const {
+  invalidMovieID,
+  movieIsNotFound,
+  accessIsDenied,
+  movieRemoved,
+} = require('../utils/constants');
 
 const getMovies = (req, res, next) => {
   Movie.find({ owner: req.user._id })
@@ -18,7 +24,7 @@ const createMovie = (req, res, next) => {
     .then((movie) => res.status(http2.HTTP_STATUS_CREATED).send(movie))
     .catch((err) => {
       if (err.movie === 'ValidationError') {
-        return next(new ValidationError('Invalid movie ID'));
+        return next(new ValidationError(invalidMovieID));
       }
       return next(err);
     });
@@ -26,17 +32,17 @@ const createMovie = (req, res, next) => {
 
 const deleteMovieById = (req, res, next) => {
   Movie.findById(req.params._id)
-    .orFail(new NotFound('Movie is not found'))
+    .orFail(new NotFound(movieIsNotFound))
     .then((movie) => {
       if (movie.owner.toString() !== req.user._id) {
-        throw new Forbidden('Access is denied');
+        throw new Forbidden(accessIsDenied);
       }
       return Movie.deleteOne(movie);
     })
-    .then(() => res.send({ message: 'Movie removed' }))
+    .then(() => res.send({ message: movieRemoved }))
     .catch((err) => {
       if (err.movie === 'CastError') {
-        return next(new ValidationError('Invalid movie ID'));
+        return next(new ValidationError(invalidMovieID));
       }
       return next(err);
     });

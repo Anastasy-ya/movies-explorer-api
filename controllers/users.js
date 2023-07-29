@@ -6,13 +6,21 @@ const ConflictError = require('../errors/ConflictError');
 const JsonWebTokenError = require('../errors/JsonWebTokenError');
 const ValidationError = require('../errors/ValidationError');
 const NotFound = require('../errors/NotFound');
+const {
+  fieldsIsNotFilled,
+  userAlreadyExists,
+  userIsNotFound,
+  invalidEmailOrPassword,
+  invalidUserID,
+  loggedOut,
+} = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 const createUser = (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return next(new ValidationError('One of the fields or more is not filled'));
+    return next(new ValidationError(fieldsIsNotFilled));
   }
   return bcrypt.hash(req.body.password, 10)
     .then((hash) => {
@@ -23,7 +31,7 @@ const createUser = (req, res, next) => {
         .then((user) => res.status(http2.HTTP_STATUS_CREATED).send(user))
         .catch((err) => {
           if (err.code === 11000) {
-            return next(new ConflictError('User already exists'));
+            return next(new ConflictError(userAlreadyExists));
           }
           return next(err);
         });
@@ -34,11 +42,11 @@ const createUser = (req, res, next) => {
 const login = (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return next(new ValidationError('One of the fields or more is not filled'));
+    return next(new ValidationError(fieldsIsNotFilled));
   }
   return User.findOne({ email })
     .select('+password')
-    .orFail(() => new JsonWebTokenError('User not found'))
+    .orFail(() => new JsonWebTokenError(userIsNotFound))
     .then((user) => {
       bcrypt.compare(password, user.password)
         .then((isValidUser) => {
@@ -57,7 +65,7 @@ const login = (req, res, next) => {
             });
             return res.send(user.toJSON());
           }
-          return next(new JsonWebTokenError('Invalid email or password'));
+          return next(new JsonWebTokenError(invalidEmailOrPassword));
         });
     })
     .catch(next);
@@ -65,13 +73,13 @@ const login = (req, res, next) => {
 
 const getUserData = (req, res, next) => {
   User.findById(req.user._id)
-    .orFail(() => new NotFound('User ID is not found'))
+    .orFail(() => new NotFound(userIsNotFound))
     .then((user) => {
       res.status(http2.HTTP_STATUS_OK).send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        return next(new ValidationError('Invalid user ID'));
+        return next(new ValidationError(invalidUserID));
       }
       return next(err);
     });
@@ -90,11 +98,13 @@ const changeProfileData = (req, res, next) => {
       upsert: false,
     },
   )
-    .orFail(() => new NotFound('User ID is not found'))
+    .orFail(() => new NotFound(userIsNotFound))
     .then((user) => res.status(http2.HTTP_STATUS_OK).send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError') {
-        return next(new ValidationError('Invalid user ID'));
+      if (err.code === 11000) {
+        return next(new ConflictError(userAlreadyExists));
+      } if (err.name === 'ValidationError') {
+        return next(new ValidationError(invalidUserID));
       }
       return next(err);
     });
@@ -102,7 +112,7 @@ const changeProfileData = (req, res, next) => {
 
 const logOut = (_, res, next) => {
   try {
-    res.clearCookie('jwt').send({ message: 'Logged out' });
+    res.clearCookie('jwt').send({ message: loggedOut });
   } catch (err) {
     next(err);
   }

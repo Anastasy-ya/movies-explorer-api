@@ -26,7 +26,7 @@ const routes = require('./routes/index');
 
 const errorHandler = require('./middlewares/error');
 
-const { DB_URL_DIPLOM = 'mongodb://127.0.0.1:27017/bitfilmsdb', PORT = 3001 } = process.env;
+const { DB_URL_DIPLOM, PORT } = process.env;
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -37,12 +37,8 @@ mongoose.connect(DB_URL_DIPLOM, {
 
 app.use(cors({
   origin: [
-    'http://localhost:3001',
-    'http://localhost:3000',
     'http://anastasy-ya.diplom.nomoredomains.xyz',
     'http://api.anastasy-ya.diplom.nomoredomains.xyz',
-    'https://localhost:3001',
-    'https://localhost:3000',
     'https://anastasy-ya.diplom.nomoredomains.xyz',
     'https://api.anastasy-ya.diplom.nomoredomains.xyz',
   ],

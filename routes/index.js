@@ -12,6 +12,7 @@ const {
 const auth = require('../middlewares/auth');
 const movieRoutes = require('./movies');
 const userRoutes = require('./users');
+const { pageIsNotFound } = require('../utils/constants');
 
 router.post('/signin', signinValidation, login);
 router.post('/signup', signUpValidation, createUser);
@@ -22,7 +23,7 @@ router.use(auth);
 router.use('/movies', movieRoutes);
 router.use('/users', userRoutes);
 router.use('*', (_, res, next) => {
-  throw next(new NotFound('Page not found'));
+  throw next(new NotFound(pageIsNotFound));
 });
 
 module.exports = router;
