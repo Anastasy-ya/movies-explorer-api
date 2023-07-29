@@ -31,6 +31,7 @@ const { DB_URL_DIPLOM, PORT } = process.env;
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 mongoose.connect(DB_URL_DIPLOM, {
+
   useNewUrlParser: true,
   family: 4,
 });
