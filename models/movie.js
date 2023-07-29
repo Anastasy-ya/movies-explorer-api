@@ -1,59 +1,61 @@
 const mongoose = require('mongoose');
 const { isURL } = require('validator');
 
-const cardSchema = new mongoose.Schema({
-  country: { //
+const { invalidImage, invalidTrailerLink, invalidThumbnail } = require('../utils/constants');
+
+const movieSchema = new mongoose.Schema({
+  country: {
     type: String,
     required: true,
   },
-  director: { //
+  director: {
     type: String,
     required: true,
   },
-  duration: { //
+  duration: {
     type: Number,
     required: true,
   },
-  year: { //
+  year: {
     type: String,
     required: true,
   },
-  description: { //
+  description: {
     type: String,
     required: true,
   },
   image: {
     type: String,
     required: true,
-    validate: [isURL, 'Invalid avatar URL'], // карточка не проходит валидацию из-за кривого адреса в бд
+    validate: [isURL, invalidImage],
   },
-  trailerLink: { //
+  trailerLink: {
     type: String,
     required: true,
-    validate: [isURL, 'Invalid avatar URL'],
+    validate: [isURL, invalidTrailerLink],
   },
   thumbnail: {
     type: String,
     required: true,
-    validate: [isURL, 'Invalid avatar URL'],
+    validate: [isURL, invalidThumbnail],
   },
-  owner: { // добавится по умолчанию
+  owner: {
     type: mongoose.Types.ObjectId,
     required: true,
     ref: 'user',
   },
-  id: { // создается _id
+  movieId: {
     type: Number,
     required: true,
   },
-  nameRU: { //
+  nameRU: {
     type: String,
     required: true,
   },
-  nameEN: { //
+  nameEN: {
     type: String,
     required: true,
   },
 });
 
-module.exports = mongoose.model('card', cardSchema);
+module.exports = mongoose.model('movie', movieSchema);

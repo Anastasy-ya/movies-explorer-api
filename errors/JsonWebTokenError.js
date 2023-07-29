@@ -1,4 +1,4 @@
-class JsonWebTokenError extends Error { // 401
+class JsonWebTokenError extends Error {
   constructor(message) {
     super(message);
     this.name = 'Access denied!';
