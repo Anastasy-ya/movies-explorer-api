@@ -15,6 +15,11 @@ const invalidTrailerLink = 'Invalid trailerLink';
 const invalidThumbnail = 'Invalid thumbnail';
 const pageIsNotFound = 'Page is not found';
 
+const checkSecretWord = () => {
+  const { NODE_ENV, JWT_SECRET } = process.env;
+  return NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret';
+};
+
 module.exports = {
   internalServerError,
   fieldsIsNotFilled,
@@ -32,4 +37,5 @@ module.exports = {
   invalidTrailerLink,
   invalidThumbnail,
   pageIsNotFound,
+  checkSecretWord,
 };

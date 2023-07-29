@@ -13,9 +13,8 @@ const {
   invalidEmailOrPassword,
   invalidUserID,
   loggedOut,
+  checkSecretWord,
 } = require('../utils/constants');
-
-const { NODE_ENV, JWT_SECRET } = process.env;
 
 const createUser = (req, res, next) => {
   const { email, password } = req.body;
@@ -55,7 +54,7 @@ const login = (req, res, next) => {
               {
                 _id: user._id,
               },
-              NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+              checkSecretWord(),
               { expiresIn: '7d' },
             );
             res.cookie('jwt', jwt, {
