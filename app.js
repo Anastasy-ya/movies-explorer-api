@@ -5,7 +5,7 @@ const express = require('express');
 
 const helmet = require('helmet');
 
-const rateLimit = require('express-rate-limit');
+// const rateLimit = require('express-rate-limit'); //раскомментироватьт
 
 const { errors } = require('celebrate');
 
@@ -13,10 +13,10 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 100,
+// }); //раскомментироватьт
 
 const cookieParser = require('cookie-parser');
 
@@ -31,6 +31,7 @@ const { DB_URL_DIPLOM, PORT } = process.env;
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 mongoose.connect(DB_URL_DIPLOM, {
+
   useNewUrlParser: true,
   family: 4,
 });
@@ -43,7 +44,8 @@ app.use(cors({
     'https://api.anastasy-ya.diplom.nomoredomains.xyz',
     'http://localhost:3000',
     'http://localhost:3001',
-    '*',
+    'https://localhost:3000',
+    'https://localhost:3001',
   ],
   credentials: true,
 }));
@@ -56,7 +58,7 @@ app.use(cookieParser());
 
 app.use(requestLogger);
 
-app.use(limiter);
+// app.use(limiter); //раскомменттировать
 
 app.use(routes);
 

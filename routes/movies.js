@@ -7,6 +7,7 @@ const {
 } = require('../controllers/movies');
 
 const {
+
   createMovieValidation,
   MovieIdValidation,
 } = require('../middlewares/validation');
