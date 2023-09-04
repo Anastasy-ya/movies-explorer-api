@@ -1,11 +1,10 @@
-/* eslint-disable no-console */
 require('dotenv').config();
 
 const express = require('express');
 
 const helmet = require('helmet');
 
-// const rateLimit = require('express-rate-limit'); //раскомментироватьт
+const rateLimit = require('express-rate-limit');
 
 const { errors } = require('celebrate');
 
@@ -13,10 +12,10 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-// const limiter = rateLimit({
-//   windowMs: 15 * 60 * 1000,
-//   max: 100,
-// }); //раскомментироватьт
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
 
 const cookieParser = require('cookie-parser');
 
@@ -38,16 +37,9 @@ mongoose.connect(DB_URL_DIPLOM, {
 
 app.use(cors({
   origin: [
-    'http://anastasy-ya.diplom.nomoredomains.xyz',
-    'http://api.anastasy-ya.diplom.nomoredomains.xyz',
-    'https://anastasy-ya.diplom.nomoredomains.xyz',
-    'https://api.anastasy-ya.diplom.nomoredomains.xyz',
     'http://localhost:3000',
-    'http://localhost:3001',
-    'https://localhost:3000',
-    'https://localhost:3001',
-    'http://localhost:3002',
-    'https://localhost:3002',
+    'https://anastasy-ya.diplom.nomoredomains.xyz',
+    'http://anastasy-ya.diplom.nomoredomains.xyz',
   ],
   credentials: true,
 }));
@@ -60,7 +52,7 @@ app.use(cookieParser());
 
 app.use(requestLogger);
 
-// app.use(limiter); //раскомменттировать
+app.use(limiter);
 
 app.use(routes);
 
