@@ -40,6 +40,7 @@ app.use(cors({
     'http://localhost:3000',
     'https://anastasy-ya.diplom.nomoredomains.xyz',
     'http://anastasy-ya.diplom.nomoredomains.xyz',
+    '*',
   ],
   credentials: true,
 }));
