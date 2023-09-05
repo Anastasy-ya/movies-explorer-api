@@ -14,7 +14,7 @@ const app = express();
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 200, //рекомендованные настройки 100
 });
 
 const cookieParser = require('cookie-parser');
@@ -38,6 +38,7 @@ mongoose.connect(DB_URL_DIPLOM, {
 app.use(cors({
   origin: [
     'http://localhost:3000',
+    'http://localhost:3001',
     'https://anastasy-ya.diplom.nomoredomains.xyz',
     'http://anastasy-ya.diplom.nomoredomains.xyz',
     '*',
