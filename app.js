@@ -14,7 +14,7 @@ const app = express();
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 200, //рекомендованные настройки 100
+  max: 150,
 });
 
 const cookieParser = require('cookie-parser');
