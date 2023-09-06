@@ -32,7 +32,7 @@ const createUser = (req, res, next) => {
           if (err.code === 11000) {
             return next(new ConflictError(userAlreadyExists));
           }
-          if (err.name === 'ValidationError') {
+          if (err.name === 'ValidationError' || err.code === 400) {
             return next(new ValidationError(invalidEmailOrPassword));
           }
           return next(err);
