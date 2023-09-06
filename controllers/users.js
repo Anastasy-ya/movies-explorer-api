@@ -17,8 +17,8 @@ const {
 } = require('../utils/constants');
 
 const createUser = (req, res, next) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
     return next(new ValidationError(fieldsIsNotFilled));
   }
   return bcrypt.hash(req.body.password, 10)
@@ -32,7 +32,7 @@ const createUser = (req, res, next) => {
           if (err.code === 11000) {
             return next(new ConflictError(userAlreadyExists));
           }
-          if (err.code === 400) {
+          if (err.name === 'ValidationError') {
             return next(new ValidationError(invalidEmailOrPassword));
           }
           return next(err);

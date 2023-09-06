@@ -8,7 +8,7 @@ const signUpValidation = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email().pattern(reqEmail),
     password: Joi.string().required(),
-    name: Joi.string().min(2).max(40).required(),
+    name: Joi.string().min(2).max(20).required(),
   }),
 });
 
@@ -21,7 +21,7 @@ const signinValidation = celebrate({
 
 const changeProfileDataValidation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(40),
+    name: Joi.string().min(2).max(20),
     email: Joi.string().email(),
   }),
 });
