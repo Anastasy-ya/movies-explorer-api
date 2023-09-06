@@ -1,14 +1,15 @@
 const { Joi, celebrate } = require('celebrate');
-const validator = require('validator');
+
 
 // const regUrl = /^(ftp|http|https):\/\/[^ "]+$/;
-const reqEmail = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
+const reqEmail = /^[a-zA-Z0-9_\-.]{1,}@[a-zA-Z0-9_\-.]{1,}\.[a-zA-Z]{2,5}$/;
+// "^[a-zA-Z0-9_\-.]{1,}@[a-zA-Z0-9_\-.]{1,}\.[a-zA-Z]{2,5}$"
 
 const signUpValidation = celebrate({
   body: Joi.object().keys({
+    name: Joi.string().min(2).max(20).required(),
     email: Joi.string().required().email().pattern(reqEmail),
     password: Joi.string().required(),
-    name: Joi.string().min(2).max(20).required(),
   }),
 });
 
@@ -34,18 +35,8 @@ const createMovieValidation = celebrate({
     year: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().required(),
-    trailerLink: Joi.string().required().custom((value, helpers) => {
-      if (!validator.isURL(value)) {
-        return helpers.error('Некорректный URL');
-      }
-      return value;
-    }),
-    thumbnail: Joi.string().required().custom((value, helpers) => {
-      if (!validator.isURL(value)) {
-        return helpers.error('Некорректный URL');
-      }
-      return value;
-    }),
+    trailerLink: Joi.string().required(),
+    thumbnail: Joi.string().required(),
     movieId: Joi.string().hex().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
