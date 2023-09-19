@@ -63,8 +63,8 @@ const login = (req, res, next) => {
             res.cookie('jwt', jwt, {
               maxAge: 24 * 60 * 60 * 1000,
               httpOnly: true,
-              // secure: true,
-              sameSite: 'None',
+              secure: true,
+              sameSite: 'none',
             });
             return res.send(user.toJSON());
           }
@@ -115,7 +115,7 @@ const changeProfileData = (req, res, next) => {
 
 const logOut = (_, res, next) => {
   try {
-    res.clearCookie('jwt').send({ message: loggedOut });
+    res.clearCookie('jwt', { sameSite: 'none', secure: true }).send({ message: loggedOut });
   } catch (err) {
     next(err);
   }
