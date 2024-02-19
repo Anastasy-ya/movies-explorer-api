@@ -1,5 +1,8 @@
-# movies-explorer-frontend
+# movies-explorer-api
 Дипломная работа по курсу Веб-разработчик. Яндекс Практикум
+
+*В этом репозитории располагается бэкенд.*<br>
+*Фронтенд по [ссылке](https://github.com/Anastasy-ya/movies-explorer-frontend)*
 
 ## Технологии
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
@@ -31,10 +34,6 @@
 Использован сторонний API MoviesExplorer — сервис поиска фильмов по ключевым словам.
 - Использование сторонних библиотек разрешено только для валидации формы. Использован React Hook Foorm.
 
-
-
-*В этом репозитории располагается бэкенд.*<br>
-*Фронтенд по [ссылке](https://github.com/Anastasy-ya/movies-explorer-frontend)*
 
 
 [Ссылка на макет в Figma](https://www.figma.com/file/mqW0Joa8w2EToBoXqKky1S/Diploma-(Copy)?type=design&node-id=344-0&mode=design)
