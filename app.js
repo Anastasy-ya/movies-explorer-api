@@ -39,8 +39,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://localhost:3001',
-    'https://mesto.anastkm4.beget.tech',
-    'http://mesto.anastkm4.beget.tech',
+    'https://movies.anastkm4.beget.tech',
+    'http://movies.anastkm4.beget.tech',
   ],
   credentials: true,
 }));
