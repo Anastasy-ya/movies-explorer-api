@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-
-const { isEmail } = require('validator');
+const validator = require('validator');
 
 const { invalidEmailOrPassword } = require('../utils/constants');
 
@@ -10,13 +9,16 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     minlength: 2,
-    maxlength: 30,
+    maxlength: 20,
   },
   email: {
     type: String,
     unique: true,
     required: true,
-    validate: [isEmail, invalidEmailOrPassword],
+    validate: {
+      validator: (v) => validator.isEmail(v),
+      message: invalidEmailOrPassword,
+    },
   },
   password: {
     type: String,

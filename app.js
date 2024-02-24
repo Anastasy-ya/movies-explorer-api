@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 require('dotenv').config();
 
 const express = require('express');
@@ -15,7 +14,7 @@ const app = express();
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 150,
 });
 
 const cookieParser = require('cookie-parser');
@@ -38,13 +37,10 @@ mongoose.connect(DB_URL_DIPLOM, {
 
 app.use(cors({
   origin: [
-    'http://anastasy-ya.diplom.nomoredomains.xyz',
-    'http://api.anastasy-ya.diplom.nomoredomains.xyz',
-    'https://anastasy-ya.diplom.nomoredomains.xyz',
-    'https://api.anastasy-ya.diplom.nomoredomains.xyz',
     'http://localhost:3000',
     'http://localhost:3001',
-    '*',
+    'https://movies.anastkm4.beget.tech',
+    'http://movies.anastkm4.beget.tech',
   ],
   credentials: true,
 }));

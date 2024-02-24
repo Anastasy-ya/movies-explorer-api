@@ -17,11 +17,11 @@ const {
 } = require('../utils/constants');
 
 const createUser = (req, res, next) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
     return next(new ValidationError(fieldsIsNotFilled));
   }
-  return bcrypt.hash(req.body.password, 10)
+  bcrypt.hash(req.body.password, 10) //return 
     .then((hash) => {
       User.create({
         ...req.body,
@@ -31,6 +31,9 @@ const createUser = (req, res, next) => {
         .catch((err) => {
           if (err.code === 11000) {
             return next(new ConflictError(userAlreadyExists));
+          }
+          if (err.name === 'ValidationError' || err.code === 400) {
+            return next(new ValidationError(invalidEmailOrPassword));
           }
           return next(err);
         });
@@ -58,9 +61,10 @@ const login = (req, res, next) => {
               { expiresIn: '7d' },
             );
             res.cookie('jwt', jwt, {
-              maxAge: 604800,
+              maxAge: 24 * 60 * 60 * 1000,
               httpOnly: true,
-              sameSite: true,
+              secure: true,
+              sameSite: 'none',
             });
             return res.send(user.toJSON());
           }
@@ -111,7 +115,7 @@ const changeProfileData = (req, res, next) => {
 
 const logOut = (_, res, next) => {
   try {
-    res.clearCookie('jwt').send({ message: loggedOut });
+    res.clearCookie('jwt', { sameSite: 'none', secure: true }).send({ message: loggedOut });
   } catch (err) {
     next(err);
   }

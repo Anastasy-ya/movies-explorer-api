@@ -1,13 +1,14 @@
 const { Joi, celebrate } = require('celebrate');
 
-const regUrl = /^https?:\/\/(www\.)?[a-zA-Z\d-]+\.[\w\d\-.~:/?#[\]@!$&'()*+,;=]{2,}#?$/;
-const reqEmail = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+/;
+// const regUrl = /^(ftp|http|https):\/\/[^ "]+$/;
+const reqEmail = /^[a-zA-Z0-9_\-.]{1,}@[a-zA-Z0-9_\-.]{1,}\.[a-zA-Z]{2,5}$/;
+// "^[a-zA-Z0-9_\-.]{1,}@[a-zA-Z0-9_\-.]{1,}\.[a-zA-Z]{2,5}$"
 
 const signUpValidation = celebrate({
   body: Joi.object().keys({
+    name: Joi.string().min(2).max(20).required(),
     email: Joi.string().required().email().pattern(reqEmail),
     password: Joi.string().required(),
-    name: Joi.string().min(2).max(30).required(),
   }),
 });
 
@@ -20,7 +21,7 @@ const signinValidation = celebrate({
 
 const changeProfileDataValidation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(20),
     email: Joi.string().email(),
   }),
 });
@@ -32,9 +33,9 @@ const createMovieValidation = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().pattern(regUrl),
-    trailerLink: Joi.string().required().pattern(regUrl),
-    thumbnail: Joi.string().required().pattern(regUrl),
+    image: Joi.string().required(),
+    trailerLink: Joi.string().required(),
+    thumbnail: Joi.string().required(),
     movieId: Joi.string().hex().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
