@@ -1,6 +1,5 @@
 const { Joi, celebrate } = require('celebrate');
 
-
 // const regUrl = /^(ftp|http|https):\/\/[^ "]+$/;
 const reqEmail = /^[a-zA-Z0-9_\-.]{1,}@[a-zA-Z0-9_\-.]{1,}\.[a-zA-Z]{2,5}$/;
 // "^[a-zA-Z0-9_\-.]{1,}@[a-zA-Z0-9_\-.]{1,}\.[a-zA-Z]{2,5}$"

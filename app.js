@@ -39,8 +39,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://localhost:3001',
-    'https://anastasy-ya.diplom.nomoredomains.xyz',
-    'http://anastasy-ya.diplom.nomoredomains.xyz',
+    'https://mesto.anastkm4.beget.tech',
+    'http://mesto.anastkm4.beget.tech',
   ],
   credentials: true,
 }));
