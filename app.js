@@ -39,8 +39,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://localhost:3001',
-    'https://movies.anastkm4.beget.tech',
-    'http://movies.anastkm4.beget.tech',
+    'http://api.anastasy-ya.diplom.nomoredomains.xyz',
+    'http://anastasy-ya.diplom.nomoredomains.xyz',
   ],
   credentials: true,
 }));
