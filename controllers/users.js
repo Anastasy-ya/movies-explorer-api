@@ -21,7 +21,7 @@ const createUser = (req, res, next) => {
   if (!name || !email || !password) {
     return next(new ValidationError(fieldsIsNotFilled));
   }
-  bcrypt.hash(req.body.password, 10) //return 
+  return bcrypt.hash(req.body.password, 10)
     .then((hash) => {
       User.create({
         ...req.body,
