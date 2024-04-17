@@ -37,12 +37,15 @@ mongoose.connect(DB_URL_DIPLOM, {
 
 app.use(cors({
   origin: [
+    '*',
     'http://localhost:3000',
     'http://localhost:3001',
     'http://api.anastasy-ya.diplom.nomoredomains.xyz',
     'http://anastasy-ya.diplom.nomoredomains.xyz',
   ],
   credentials: true,
+  exposedHeaders: [],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 }));
 
 app.use(express.json());
