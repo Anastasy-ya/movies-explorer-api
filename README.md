@@ -1,10 +1,12 @@
+*Read this in [Russian](README.rus.md)*
+
 # movies-explorer-api
-Дипломная работа по курсу Веб-разработчик. Яндекс Практикум
+Diploma work on the course Web developer
 
-*В этом репозитории располагается бэкенд.*<br>
-*Фронтенд по [ссылке](https://github.com/Anastasy-ya/movies-explorer-frontend)*
+*This repository contains backend.*<br>
+*frontend is there [link](https://github.com/Anastasy-ya/movies-explorer-frontend)*
 
-## Технологии
+## Technologies
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
@@ -15,11 +17,11 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
 
-## Реализация
-- Представляет из себя главную страницу-обложку, содержащую информацию о выполненном проекте и сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
+## Functionality
+- Представляет из себя главную страницу-обложку, содержащую информацию о выполненном проекте и сервис, в котором можно найти фильмы по запросу и сохранить их в личном кабинете.
 - Адаптивная верстка с учетом возможного переполнения блоков. 
 - Роуты защищены авторизацией. 
-- Запрос к серверу осуществляется только при первом поиске(обязательный пункт задания).
+- Запрос к серверу осуществляется только при первом поиске(необычный, но обязательный пункт задания).
 Блок результатов появляется только после обработки запроса. Если пользователь ещё ничего не искал, блока с карточками на странице нет. Как только запрос сделан, 
 данные передаются в стейт-переменную и блок появляется. 
 - JWT-токен хранится в cookie, стейты в localStorage. 
@@ -31,9 +33,9 @@
 - Результаты уже выполненного запроса не пропадают, а снова отображаются пользователю, если он перезагрузил страницу или даже закрыл вкладку, но потом вернулся на сайт.
 - Осуществляется моментальная валидация форм. Если одно из полей не заполнено или не прошло валидацию, кнопка «Зарегистрироваться» неактивна.
 - В проекте два бэкенда:<br>
-На Node.js написан API для аутентификации пользователей и сохранения фильмов.<br>
-Использован сторонний API MoviesExplorer — сервис поиска фильмов по ключевым словам.
-- Использование сторонних библиотек разрешено только для валидации формы. Использован React Hook Foorm.
+На Node.js сделан самописный API для аутентификации пользователей и сохранения фильмов.<br>
+Также использован сторонний API MoviesExplorer — сервис поиска фильмов по ключевым словам.
+- Использование сторонних библиотек разрешено только для валидации формы. Использован React Hook Form.
 
 
 
@@ -53,9 +55,9 @@
 
 ## Ссылки на проект
 
-<!--Frontend https://anastasy-ya.diplom.nomoredomains.xyz
+Frontend https://anastasy-ya.diplom.nomoredomains.xyz
 
-Backend https://api.anastasy-ya.diplom.nomoredomains.xyz-->
+Backend https://api.anastasy-ya.diplom.nomoredomains.xyz
 
 Pull Request https://github.com/Anastasy-ya/movies-explorer-frontend/pull/2
 
