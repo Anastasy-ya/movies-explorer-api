@@ -23,9 +23,9 @@ Diploma work on the course Web developer
 and save them to their personal account.
 - Adaptive layout taking into account possible overflow of blocks.
 - Routes are protected by authorization.
-- A request to the server just after the first searching (an unusual but mandatory requirement of the task).
+- A request to the server occurs only after the first search (an unusual, but mandatory requirement of the task).
 - The results block appears only after processing the request. If the user has not searched yet, there are no card blocks on the page. As soon as the request is made, the data is transferred to the state variable and the block appears.
-- JWT token is stored in a cookie, states in localStorage.
+- JWT token is stored in the cookie, REACT states in the localStorage.
 - The slider is implemented independently for each page.
 - The number of cards displayed on the page depends on the screen width of the device.
 Width 1280px - 4 card rows. The "More" button loads an additional row of cards. Width 768px - 4 card rows. The "More" button loads an additional row of cards.
@@ -34,7 +34,7 @@ Width from 320px to 480px - 5 cards in 1 row. The "More" button loads 2 cards.
 - There is instant validation of forms. If any field is not filled out or has not passed validation, the "Register" button is inactive.
 - There are two backends in the project:
 1. A self-written API on Node.js for user authentication and saving movies.
-2. An omnibus MoviesExplorer API - a movie search service by keywords.
+2. A free MoviesExplorer API - a movie search service by keywords.
 - The use of third-party libraries is allowed only for form validation. In app used React Hook Form.
 
 
