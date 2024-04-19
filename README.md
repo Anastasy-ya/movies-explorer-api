@@ -53,7 +53,7 @@ Diploma work on the course Web developer
 <!---Graduate work on the course web developer/backend-->
 
 
-## Ссылки на проект
+## Проект развернут на виртуальной машине, ссылки:
 
 Frontend https://anastasy-ya.diplom.nomoredomains.xyz
 
